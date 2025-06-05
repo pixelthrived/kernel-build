@@ -42,7 +42,7 @@ jobs:
         git clone https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_arm_arm-linux-androideabi-4.9 --depth=1
   
     - name: conditionally add kernelSU next
-      if: ${{ inputs.include_ksu == "yes" }}
+      if: ${{ inputs.include_ksun == "yes" }}
       run: |
         cd android_kernel_motorola_sm6225
         echo "Adding KernelSU Next..."
