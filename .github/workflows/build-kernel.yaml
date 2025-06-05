@@ -46,7 +46,7 @@ jobs:
       run: |
         cd android_kernel_motorola_sm6225
         echo "Adding KernelSU Next..."
-        curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next/kernel/setup.sh" | bash -
+        curl -LSs "https://raw.githubusercontent.com/pixelthrived/KernelSU-Next/next/kernel/setup.sh" | bash -s next
 
     - name: build kernel
       run: |
