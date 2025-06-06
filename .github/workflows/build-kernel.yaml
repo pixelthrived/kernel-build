@@ -48,6 +48,12 @@ jobs:
         echo "Adding KernelSU Next..."
         curl -LSs "https://raw.githubusercontent.com/pixelthrived/KernelSU-Next/next/kernel/setup.sh" | bash -s next
 
+    - name: downloading SELinux source
+      run: |
+        curl -LO "https://android.googlesource.com/platform/external/selinux/+archive/2d543d20722ada2425b5bdab9d0d1d29470e7bba.tar.gz"
+        mkdir selinux
+        tar -xvf 2d543d20722ada2425b5bdab9d0d1d29470e7bba.tar.gz -C selinux
+
     - name: build kernel
       run: |
         export DEVICE=${{ github.event.inputs.device }}
@@ -63,6 +69,19 @@ jobs:
         export CROSS_COMPILE=aarch64-linux-android-
         export CROSS_COMPILE_COMPAT=arm-linux-androideabi-
         export CLANG_TRIPLE=aarch64-linux-gnu-
+        export KCFLAGS="\
+                        -I$HOME_DIR/selinux/libselinux/include/selinux \
+                        -I$HOME_DIR/selinux/libselinux/src \
+                        -I$HOME_DIR/selinux/libselinux/src/android \
+                        -I$HOME_DIR/selinux/libselinux/utils \
+                        -I$HOME_DIR/selinux/libsemanage/include/semanage \
+                        -I$HOME_DIR/selinux/libsemanage/src \
+                        -I$HOME_DIR/selinux/libsemanage/tests \
+                        -I$HOME_DIR/selinux/libsepol/include/sepol \
+                        -I$HOME_DIR/selinux/libsepol/src \
+                        -I$HOME_DIR/selinux/libsepol/tests \
+                        -I$HOME_DIR/selinux/libsepol/utils"
+
 
         cd android_kernel_motorola_sm6225
         scripts/kconfig/merge_config.sh -m \
