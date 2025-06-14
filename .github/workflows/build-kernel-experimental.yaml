@@ -26,7 +26,7 @@ jobs:
 
     - name: clone kernel source
       run: |
-        git clone https://github.com/pixelthrived/experimental_kernel_motorola_sm6225 --depth=1 --branch attempt-2
+        git clone https://github.com/pixelthrived/experimental_kernel_motorola_sm6225 --depth=1 --branch attempt-3
 
     - name: set up build deps
       run: |
