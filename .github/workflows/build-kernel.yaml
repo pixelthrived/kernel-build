@@ -1,4 +1,4 @@
-name: Build SM6225 kernel (experimental)
+name: Build SM6225 kernel
 
 on:
   workflow_dispatch:
@@ -26,7 +26,7 @@ jobs:
 
     - name: clone kernel source
       run: |
-        git clone https://github.com/pixelthrived/experimental_kernel_motorola_sm6225 --depth=1 --branch lineage-22.2
+        git clone https://github.com/pixelthrived/android_kernel_motorola_sm6225 --depth=1 --branch lineage-22.2
 
     - name: set up build deps
       run: |
@@ -44,7 +44,7 @@ jobs:
     - name: conditionally add kernelSU next
       if: ${{ inputs.include_ksun == 'yes' }}
       run: |
-        cd experimental_kernel_motorola_sm6225
+        cd android_kernel_motorola_sm6225
         echo "Adding KernelSU Next..."
         curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh" | bash -s next
 
@@ -64,7 +64,7 @@ jobs:
         export CROSS_COMPILE_COMPAT=arm-linux-androideabi-
         export CLANG_TRIPLE=aarch64-linux-gnu-
 
-        cd experimental_kernel_motorola_sm6225
+        cd android_kernel_motorola_sm6225
         scripts/kconfig/merge_config.sh -m \
           arch/arm64/configs/vendor/bengal-perf_defconfig \
           arch/arm64/configs/vendor/debugfs.config \
@@ -78,7 +78,7 @@ jobs:
 
     - name: check built output
       run: |
-        ls -lh experimental_kernel_motorola_sm6225/out/arch/arm64/boot/Image || (echo "Kernel not built!" && exit 1)
+        ls -lh android_kernel_motorola_sm6225/out/arch/arm64/boot/Image || (echo "Kernel not built!" && exit 1)
 
     - name: get datetime
       id: date
@@ -96,5 +96,5 @@ jobs:
           Triggered by: ${{ github.actor }}
           Build time: ${{ steps.date.outputs.datetime }}
         files: |
-          experimental_kernel_motorola_sm6225/out/arch/arm64/boot/Image
+          android_kernel_motorola_sm6225/out/arch/arm64/boot/Image
 
