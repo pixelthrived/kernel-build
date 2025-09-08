@@ -19,11 +19,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: GitHub Workflow Cleaner Action
-      uses: rokibhasansagar/slimhub_actions@v23.44.6
-
     - name: clone kernel source
       run: |
         git clone https://github.com/pixelthrived/android_kernel_motorola_sm6225 --depth=1
