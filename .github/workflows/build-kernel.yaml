@@ -36,8 +36,8 @@ jobs:
 
     - name: fetch toolchains
       run: |
-        curl -LO https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r547379.tar.gz
-        mkdir clang-r547379 && tar -xf clang-r547379.tar.gz -C clang-r547379
+        curl -LO https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/mirror-goog-main-llvm-toolchain-source/clang-r563880c.tar.gz
+        mkdir clang-r563880c && tar -xf clang-r563880c.tar.gz -C clang-r563880c
         git clone https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 --depth=1
         git clone https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_arm_arm-linux-androideabi-4.9 --depth=1
   
@@ -53,7 +53,7 @@ jobs:
         export DEVICE=${{ github.event.inputs.device }}
         export HOME_DIR=$PWD
         export ARCH=arm64
-        export CLANG_PATH=$HOME_DIR/clang-r547379/bin
+        export CLANG_PATH=$HOME_DIR/clang-r563880c/bin
         export ARM64_TCPATH=$HOME_DIR/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/bin
         export ARMEABI_TCPATH=$HOME_DIR/android_prebuilts_gcc_linux-x86_arm_arm-linux-androideabi-4.9/bin
         export PATH=$CLANG_PATH:$ARM64_TCPATH:$ARMEABI_TCPATH:$PATH
